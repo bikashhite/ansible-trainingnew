@@ -1,0 +1,19 @@
+---
+- name: check when condition
+  hosts: dockernode
+  become: true
+  
+  tasks:
+  - name: install htppd
+    yum:
+     name: httpd
+     state: installed
+    when: ansible_os_family == "RedHat"
+    notify: start httpd
+  handlers: 
+    
+  - name: start httpd
+    service:
+     name: httpd
+     state: started
+    when: ansible_os_family == "RedHat" 

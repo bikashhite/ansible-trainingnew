@@ -1,0 +1,6 @@
+---
+- name: install appache/httpd
+  hosts: dockernode
+  become: true
+  roles: 
+   - setup-apache

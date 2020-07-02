@@ -1,0 +1,13 @@
+---
+- name: install package in docker node
+  hosts: dockernode
+  become: true
+  gather_facts: no
+
+
+  tasks: 
+  - name: install git
+    yum:
+     name: git
+     state: installed
+

@@ -1,0 +1,9 @@
+---
+- hosts: dockernode
+#  become: true
+  
+  tasks: 
+  - name: creating a user biks in ansible and dockerserver
+    user: name=biks
+
+ 

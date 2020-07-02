@@ -1,0 +1,40 @@
+---
+- name: install tomcat
+  hosts: dockernode
+  become: true
+  
+  tasks:
+  - name: install java
+    yum:
+     name: java
+     state: installed
+     
+    
+#  - name: download tomcat package
+#    get_url:
+#     url: http://apachemirror.wuchna.com/tomcat/tomcat-8/v8.5.56/bin/apache-tomcat-8.5.56.tar.gz
+#     dest: /opt
+    
+  - name: untar tomcat package
+    unarchive: 
+     src: /opt/apache-tomcat-8.5.56.tar.gz
+     dest: /opt/
+     remote_src: yes
+    
+  - name: add execution permission 
+    file: 
+     path: /opt/apache-tomcat-8.5.56/bin/startup.sh
+     mode: 0777
+     
+  - name: start tomcat service
+    shell: nohup sh startup.sh
+    args: 
+     chdir: /opt/apache-tomcat-8.5.56/bin/
+    tags: start_apache
+
+  - name: stop tomcat service
+    shell: nohup sh shutdown.sh
+    args:
+     chdir: /opt/apache-tomcat-8.5.56/bin/
+    tags: stop_apache
+  

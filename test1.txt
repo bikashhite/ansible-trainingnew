@@ -1,0 +1,2 @@
+Bikash ansible file text
+this file copied by ansible playbood

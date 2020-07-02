@@ -1,0 +1,13 @@
+---
+- name: ansible play book to test ansible vault
+  hosts: dockernode
+  become: true
+  vars_files:
+    - vault-pass.yml
+  
+  tasks: 
+  - name: pull data from git
+    git: 
+     repo: https://bikashhite:{{ pass }}@github.com/bikashhite/hello-world.git
+     dest: /home/ansadmin/git_repo1/
+    

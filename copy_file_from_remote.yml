@@ -1,0 +1,14 @@
+---
+- name: copy file in docker node
+  hosts: dockernode
+  become: true
+  gather_facts: no
+
+
+  tasks:
+  - name: copy a file
+    fetch: 
+     src: /var/www/html/index.html
+     dest: /home/ansadmin/
+     flat: yes
+    

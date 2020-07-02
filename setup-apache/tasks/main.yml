@@ -1,0 +1,20 @@
+---
+# tasks file for setup-apache
+- name: install htppd
+  yum: 
+   name: httpd
+   state: installed
+  notify: start httpd
+- name: Ensure port should be {{ port }}
+  lineinfile: 
+    path: /etc/httpd/conf/httpd.conf
+    regexp: '^Listen'
+    insertafter: '^#Listen'
+    line: Listen {{ port }}
+  notify: restart httpd
+    
+- name: copy a file
+  copy:
+   src: index.html
+   dest: /var/www/html
+  notify: restart httpd
